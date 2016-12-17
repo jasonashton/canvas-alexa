@@ -1,19 +1,19 @@
 ###############################################################################
 # python3-canvaslms-api Source Code
-# Copyright (C) 2013 Lumen LLC. 
-# 
+# Copyright (C) 2013 Lumen LLC.
+#
 # This file is part of the python3-canvaslms-api module Source Code.
-# 
+#
 # python3-canvaslms-api is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
-# 
+#
 # python3-canvaslms-api is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU Affero General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU Affero General Public License
 # along with python3-canvaslms-api. If not, see <http://www.gnu.org/licenses/>.
 ###############################################################################
@@ -39,7 +39,7 @@ Return: A string containing the authorization token (stripped of leading and tra
 Parameters:
   * authTokenFilePath: A string pointing to the filepath of the authorization token file.
 """
-    
+
     # Read in the file containing the authorization token.
     f = open(authTokenFilePath)
     authToken = f.read()
@@ -92,14 +92,14 @@ Parameters:
     # Read the response body and decode it according to the specified
     #   character set.
     charset = getCharset(resp)
-    respBody = resp.readall()
+    respBody = resp.read()
     respBody = respBody.decode(charset)
 
     # If the content is JSON-encoded, then decode it into a dict object.
     isJSON = checkJSON(resp)
     if isJSON:
         respBody = json.loads(respBody, object_pairs_hook=collections.OrderedDict)
-        
+
     return respBody
 
 
@@ -128,7 +128,7 @@ This class contains the core functionality of the canvaslms module.  Note the co
     @defaultVersion.setter
     def defaultVersion(self, value):
         self._defaultVersion = value
-    
+
     @property
     def defaultPerPage(self):
         return self._defaultPerPage
@@ -158,7 +158,7 @@ Parameters:
   * defaultVersion: A string containing the version of the API.  Defaults to 'v1'.
   * defaultPerPage: An integer declaring the desired default number of API request results per page.  Default is 1000, but Canvas currently limits the maximum number of results to 50 per page.
 """
-        
+
         self.defaultServer = defaultServer
         self.defaultAuthToken = defaultAuthToken
         self.defaultVersion = defaultVersion
@@ -179,7 +179,7 @@ Parameters: See the parameter list for the callAPI function.
         # Make the initial call to the API  to retrieve the first page
         #   of results.
         resp = self.callAPI(url, absoluteUrl, verbose)
-        
+
         # Always send back the first page of results.
         yield resp
 
