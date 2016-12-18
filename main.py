@@ -1,11 +1,19 @@
 import canvaslms.api as api
+import json
 
+def connect_server(tokenLocation, server):
 
-authToken = api.getAuthTokenFromFile('auth-token.txt')
+    authToken = api.getAuthTokenFromFile('auth-token.txt')
 
-apiObj = api.CanvasAPI('canvas.wpi.edu', authToken)
+    conn = api.CanvasAPI('canvas.wpi.edu', authToken)
 
-results = apiObj.allPages('courses')
+    return conn
 
-print(results)
+if __name__ == "__main__":
+    conn = connect_server('auth-token.txt', 'canvas.wpi.edu')
+
+    results = conn.allPages('courses')
+
+    print(json.dumps(results, sort_keys=True, indent=4))
+
 
