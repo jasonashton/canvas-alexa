@@ -55,11 +55,17 @@ def get_asst_grade(class_id, asst_id, conn):
 
 def print_last_submission(class_id, conn):
     course = conn.allPages('courses/{}'.format(class_id))[0]['name']
-    asst = get_last_asst(class_id, conn)
-    asst_name = conn.allPages('courses/{}/assignments/{}'.format(class_id, asst))[0]['name']
-    grade = get_asst_grade(class_id, asst, conn)
 
-    print('{}\nLast Updated: {}\nGrade: {}\n'.format(course, asst_name, grade))
+    asst_id = get_last_asst(class_id, conn)
+
+    asst = conn.allPages('courses/{}/assignments/{}'.format(class_id, asst_id))[0]
+
+    asst_name = asst['name']
+    asst_total = asst['points_possible']
+
+    grade = get_asst_grade(class_id, asst_id, conn)
+
+    print('{}\nLast Updated: {}\nGrade: {}/{}\n'.format(course, asst_name, grade, asst_total))
 
 
 if __name__ == "__main__":
