@@ -10,18 +10,23 @@ def connect_server(tokenLocation, server):
     return conn
 
 def list_classes(conn):
+    classes = {}
     results = conn.allPages('courses')
 
     for i in range(len(results)):
         try:
-            print("{}, {}".format(results[i]['name'], results[i]['id']))
-        except Exception as e:
-            print('Unlisted')
+            classes[results[i]['name']] =  results[i]['id']
+        except KeyError as e:
+           pass
+
+    return(classes)
 
 if __name__ == "__main__":
     conn = connect_server('auth-token.txt', 'canvas.wpi.edu')
 
-    list_classes(conn)
+    classes = list_classes(conn)
+
+    print(classes)
 
 
 
