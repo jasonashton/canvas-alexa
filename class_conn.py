@@ -69,3 +69,11 @@ class canvasConn:
         return('<p>{}:<break strength="strong" /> Last Assignment Updated: {} <break strength="strong" />Grade: <say-as interpret-as="unit">{}</say-as><break strength="weak" /> out of <say-as interpret-as="unit">{}</say-as></p>'.format(course, asst_name, grade, asst_total))
 
 
+    def name_to_id(self, name):
+        classes = self.list_classes_id()
+        name = name.lower()
+
+        for i in classes:
+            class_name = self.conn.allPages('courses/{}'.format(i))[0]['name'].lower()
+            if name in class_name:
+                return i
