@@ -89,5 +89,6 @@ ENV/
 # Rope project settings
 .ropeproject
 
-# Auth Token
+# Tools
 auth-token.txt
+ngrok
