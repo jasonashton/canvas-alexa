@@ -7,4 +7,5 @@ Currently the software does not support OAuth so you'll need to create a canvas 
 
 ### What to ask
 >Alexa, ask Canvas for my most recent grades
+
 >Alexa, ask Canvas for my most recent grades in Algorithms
